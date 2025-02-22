@@ -14,9 +14,10 @@ body {
 }
 
 .bg-gradient {
-  background: linear-gradient(to right, #ef4444, #ec4899);
+  background-image: linear-gradient(to right, #dc2626, #b91c1c);
   -webkit-background-clip: text;
   background-clip: text;
+  color: transparent;
 }
 
 /* Utility classes */
@@ -116,4 +117,14 @@ button:hover.bg-red-500 {
   100% {
     transform: translate(100px, 100px) rotate(360deg);
   }
+}
+
+@keyframes pulse-leaf {
+  0% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.05); opacity: 0.15; }
+  100% { transform: scale(1); opacity: 0.1; }
+}
+
+.bg-leaf-animation {
+  animation: pulse-leaf 4s ease-in-out infinite;
 }
