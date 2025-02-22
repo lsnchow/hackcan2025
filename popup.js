@@ -1,6 +1,26 @@
 // Run scan immediately when popup opens
 document.addEventListener('DOMContentLoaded', scanPage);
 
+
+// Add this at the top of popup.js, after your existing event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // Add the styles for the progress bar animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes progress {
+            0% {
+                stroke-dasharray: 0, 100;
+            }
+        }
+        .animate-progress {
+            animation: progress 1s ease-out forwards;
+            transform: rotate(-180deg);
+            transform-origin: 50% 50%;
+        }
+    `;
+    document.head.appendChild(style);
+});
+
 const BACKEND_URL = 'http://localhost:5000/api/cart-data';
 
 function scanPage() {
@@ -79,8 +99,7 @@ function scanPage() {
                                     resultsDiv.style.maxHeight = '400px';
                                     resultsDiv.className = 'overflow-y-auto p-4';
                                     
-                                    let productListHtml;
-                                    
+                                    let productListHtml;                               
                                     // Check if response matrix exists and has items
                                     if (!responseMatrix || responseMatrix.length === 0) {
                                         productListHtml = `
@@ -102,8 +121,35 @@ function scanPage() {
                                                             <div class="w-1/2 pr-2">
                                                                 <p class="text-gray-700 font-medium text-sm leading-snug">${row[0]}</p>
                                                             </div>
-                                                            <div class="w-1/2 pl-2">
-                                                                <!-- Right side content can be added here -->
+                                                            <div class="w-1/2 pl-2 flex justify-center items-center">
+                                                                <div class="relative w-20 h-20">
+                                                                    <!-- Background circle -->
+                                                                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                                                                        <path
+                                                                            d="M18 2.0845
+                                                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                                            fill="none"
+                                                                            stroke="#eee"
+                                                                            stroke-width="3"
+                                                                        />
+                                                                        <!-- Foreground circle with animation -->
+                                                                        <path
+                                                                            d="M18 2.0845
+                                                                            a 15.9155 15.9155 0 0 1 0 31.831
+                                                                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                                            fill="none"
+                                                                            stroke="#dc2626"
+                                                                            stroke-width="3"
+                                                                            stroke-dasharray="${Math.round((1.2*(Number(row[1]))+Number(row[2])+Number(row[3]))/3)}, 100"
+                                                                            class="animate-progress"
+                                                                        />
+                                                                    </svg>
+                                                                    <!-- Percentage text in the middle -->
+                                                                    <div class="absolute inset-0 flex items-center justify-center">
+                                                                        <span class="text-lg font-semibold text-gray-700">${Math.round((1.2*(Number(row[1]))+Number(row[2])+Number(row[3]))/3)}%</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
