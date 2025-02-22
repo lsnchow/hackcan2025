@@ -1,5 +1,3 @@
-console.log('Popup script loaded!');
-
 // Run scan immediately when popup opens
 document.addEventListener('DOMContentLoaded', scanPage);
 
@@ -73,11 +71,30 @@ function scanPage() {
                             })
                             .then(data => {
                                 console.log('Backend response:', data);
-                                resultsDiv.innerHTML = '<p class="text-green-500">Data sent to backend successfully</p>';
+
+                                // Check if data is valid and contains 'status' field
+                                if (data && data.status === 'success') {
+                                    // Create an HTML string to display the product names
+                                    const productNames = data.product_names;
+                                    let productListHtml = '<ul>';
+
+                                    // Loop through the product names and create a list
+                                    productNames.forEach((product, index) => {
+                                        productListHtml += `<li>NUMBER ${index + 1}. ${product}</li>`;
+                                    });
+
+                                    productListHtml += '</ul>';
+
+                                    // Update the resultsDiv with the product list
+                                    resultsDiv.innerHTML = productListHtml;
+                                } else {
+                                    // Handle unexpected response structure or failure
+                                    resultsDiv.innerHTML = '<p class="text-red-500">Error processing the data. Response is invalid.</p>';
+                                }
                             })
                             .catch(error => {
-                                console.error('Error sending to backend:', error);
-                                resultsDiv.innerHTML = '<p class="text-red-500">Error sending data to backend: ' + error.message + '</p>';
+                                console.error('Error processing backend response:', error);
+                                resultsDiv.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
                             });
                         }
                     );
@@ -88,4 +105,4 @@ function scanPage() {
             }, 100);  // Small delay to ensure script is ready
         });
     });
-} 
+}
