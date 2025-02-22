@@ -27,18 +27,13 @@ def receive_cart_data():
     try:
         data = request.json
         print("Received data:", data)
-        
-        filename = f'cart_data_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json'
-        filepath = os.path.join(DATA_DIR, filename)
-        
-        with open(filepath, 'w') as f:
-            json.dump(data, f, indent=2)
+    
         
         response = jsonify({
             'status': 'success',
-            'message': 'Data received and stored',
-            'filename': filename
+            'message': 'Data received and stored'
         })
+        
         response.headers['Access-Control-Allow-Origin'] = '*'
         return response
 
