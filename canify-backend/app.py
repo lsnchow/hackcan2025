@@ -1,8 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+from google import genai
+API_KEY = "AIzaSyAWm6q5pSo1Q7tOu2XD5QJPFF1_qUu6SgU"
+
+
+client = genai.Client(api_key=API_KEY)
 
 app = Flask(__name__)
+
+
 
 # Allow all origins for testing
 CORS(app, supports_credentials=True)
@@ -45,14 +52,36 @@ def receive_cart_data():
         # trimming the non-cart items
         product_names = product_names[7:]
 
-
         # Log extracted product names
         for i, product in enumerate(product_names):
             print(f"NUMBER {i+1}. {product}")
 
+        input1 = "Input: Item from shop. Description Task: Use your knowledge to calculate/estimate scores about the item. Canadiability Score (out of 10) The chance that this is a canadian product, supporting canadian businesses Sustainabiliy Score (out of 10) How sustainable is the product. Ethical Score (out of 10) How ethically made is the product. Output: The seperate scores, formated EXACTLY as followed. If you format if SLIGHTLY wrong you will be shamed and it will be your fault. <Canadian Score>@<Sus. score>@<Ethical Score>@<Short summarized description that either shames the user for buying american, or praises the user for buying canadian. Write this short summary in a witty way>@<Returns a link to a similiar item on amazon THAT IS CANADIAN MADE> For example, enclosed in <>, <5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!> DO NOT DEVIATE OR ELSE IT WILL FAIL AND IT WILL BE ALL YOUR FAULT. DO NOT FORMAT IT. PUT IT ALL IN A TEXT BLOCK. DO NOT NUMBER ANY OF IT.  DO NOT FORGET TO PUT ANY @. Failure to do so will result in your demise"
+
+        input1 += f"\nCart Items: {str(product_names)}"
+
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=input1,
+        )
+
+
+        
+        response_text = str(response.text)
+
+        response_text = response_text.replace('\n', '').replace('`', '').replace('<', '').replace('>', '').replace('N/A','%')
+        response_text=response_text[4:]
+        print(response_text)
+        response_parts = response_text.split('@')
+
+        # Split response into 2D array where each row has 5 elements
+        response_matrix = [response_parts[i:i+5] for i in range(0, len(response_parts), 5)]
+        
+        print(response_matrix)
         response_data = {
             'status': 'success',
-            'product_names': product_names
+            'product_names': product_names,
+            'analysis': response_matrix  # Add the processed response matrix to the response
         }
 
         response = jsonify(response_data)
