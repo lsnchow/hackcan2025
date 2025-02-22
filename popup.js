@@ -72,7 +72,7 @@ function scanPage() {
                                 console.log('Backend response:', data);
 
                                 if (data && data.status === 'success') {
-                                    const productNames = data.product_names;
+                                    const responseMatrix = data.analysis;
                                     
                                     // Make the results div scrollable
                                     resultsDiv.style.height = '400px';
@@ -81,8 +81,8 @@ function scanPage() {
                                     
                                     let productListHtml;
                                     
-                                    // Check if array is empty
-                                    if (productNames.length === 0) {
+                                    // Check if response matrix exists and has items
+                                    if (!responseMatrix || responseMatrix.length === 0) {
                                         productListHtml = `
                                             <div class="text-center py-6">
                                                 <p class="text-red-600 font-semibold">No products found in cart</p>
@@ -92,7 +92,7 @@ function scanPage() {
                                     } else {
                                         productListHtml = `
                                             <div class="space-y-4">
-                                                ${productNames.map((product, index) => `
+                                                ${responseMatrix.map((row, index) => `
                                                     <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all duration-300">
                                                         <div class="flex justify-between items-center">
                                                             <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Item ${index + 1}</span>
@@ -100,7 +100,7 @@ function scanPage() {
                                                         </div>
                                                         <div class="flex mt-2">
                                                             <div class="w-1/2 pr-2">
-                                                                <p class="text-gray-700 font-medium text-sm leading-snug">${product}</p>
+                                                                <p class="text-gray-700 font-medium text-sm leading-snug">${row[0]}</p>
                                                             </div>
                                                             <div class="w-1/2 pl-2">
                                                                 <!-- Right side content can be added here -->
