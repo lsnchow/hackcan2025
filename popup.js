@@ -98,7 +98,14 @@ function scanPage() {
                                                             <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Item ${index + 1}</span>
                                                             <span class="text-xs text-gray-400">In cart</span>
                                                         </div>
-                                                        <p class="mt-2 text-gray-700 font-medium text-sm leading-snug">${product}</p>
+                                                        <div class="flex mt-2">
+                                                            <div class="w-1/2 pr-2">
+                                                                <p class="text-gray-700 font-medium text-sm leading-snug">${product}</p>
+                                                            </div>
+                                                            <div class="w-1/2 pl-2">
+                                                                <!-- Right side content can be added here -->
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 `).join('')}
                                             </div>
