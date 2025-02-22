@@ -43,7 +43,8 @@ def receive_cart_data():
                     product_names.append(clean_name)
 
         # trimming the non-cart items
-        product_names = product_names[9:]
+        product_names = product_names[7:]
+
 
         # Log extracted product names
         for i, product in enumerate(product_names):
