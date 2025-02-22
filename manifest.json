@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "Canify - Canadian Product Checker",
+  "description": "Check if products in your shopping cart are made in Canada",
+  
+  "version": "1.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "host_permissions": [
+    "*://*.amazon.ca/*",
+    "*://*.walmart.ca/*",
+    "*://*.canadiantire.ca/*",
+    "*://*.bestbuy.ca/*",
+    "*://*.shopify.com/*",
+    "http://localhost:5000/*",
+    "http://127.0.0.1:5000/*"
+  ],
+  "content_scripts": [{
+    "matches": [
+      "*://*.amazon.ca/*",
+      "*://*.walmart.ca/*",
+      "*://*.canadiantire.ca/*",
+      "*://*.bestbuy.ca/*",
+      "*://*.shopify.com/*"
+    ],
+    "js": ["extract.js"]
+  }],
+  "web_accessible_resources": [{
+    "resources": ["extract.js"],
+    "matches": [
+      "*://*.amazon.ca/*",
+      "*://*.walmart.ca/*",
+      "*://*.canadiantire.ca/*",
+      "*://*.bestbuy.ca/*",
+      "*://*.shopify.com/*"
+    ]
+  }],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src http://localhost:5000"
+  }
+}

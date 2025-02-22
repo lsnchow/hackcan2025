@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  width: 400px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.bg-gradient {
+  background: linear-gradient(to right, #ef4444, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Utility classes */
+.w-\[400px\] { width: 400px; }
+.h-\[500px\] { height: 500px; }
+.p-4 { padding: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mr-2 { margin-right: 0.5rem; }
+.space-x-2 > * + * { margin-left: 0.5rem; }
+.space-y-2 > * + * { margin-top: 0.5rem; }
+
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+
+.rounded-lg { border-radius: 0.5rem; }
+.overflow-hidden { overflow: hidden; }
+
+.bg-white { background-color: white; }
+.bg-gray-50 { background-color: #f9fafb; }
+.bg-red-500 { background-color: #ef4444; }
+.text-red-500 { color: #ef4444; }
+.text-gray-500 { color: #6b7280; }
+.text-gray-600 { color: #4b5563; }
+.text-gray-800 { color: #1f2937; }
+.text-white { color: white; }
+.text-transparent { color: transparent; }
+
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+
+.w-4 { width: 1rem; }
+.h-4 { height: 1rem; }
+.w-6 { width: 1.5rem; }
+.h-6 { height: 1.5rem; }
+
+.pointer-events-none { pointer-events: none; }
+.z-0 { z-index: 0; }
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+button:hover.bg-red-500 {
+  background-color: #dc2626;
+}
+
+/* Maple Leaf Animation */
+.maple-leaf {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  color: rgba(239, 68, 68, 0.2);
+  animation: float 15s infinite linear;
+}
+
+.maple-leaf::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M12,2.5L9.5,7.5L12,6.5L14.5,7.5L12,2.5M20,13C20,13 16.5,16 16.5,18C16.5,19.5 17.7,20 17.7,20C17.7,20 7.7,20 7.7,20C7.7,20 8.5,19.5 8.5,18C8.5,16 5,13 5,13C5,13 8.5,13 10,13C10.5,13 11,13 11,13V11C11,11 10.5,11 10,11C8.5,11 5,11 5,11C5,11 8.5,8 8.5,6C8.5,4.5 7.7,4 7.7,4C7.7,4 17.7,4 17.7,4C17.7,4 16.5,4.5 16.5,6C16.5,8 20,11 20,11C20,11 16.5,11 15,11C14.5,11 14,11 14,11V13C14,13 14.5,13 15,13C16.5,13 20,13 20,13Z'/%3E%3C/svg%3E");
+}
+
+.maple-leaf-1 {
+  top: 20%;
+  left: 10%;
+  animation-delay: -5s;
+}
+
+.maple-leaf-2 {
+  top: 50%;
+  right: 20%;
+  animation-delay: -10s;
+}
+
+.maple-leaf-3 {
+  bottom: 30%;
+  left: 30%;
+  animation-delay: -7s;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(100px, 100px) rotate(360deg);
+  }
+}
