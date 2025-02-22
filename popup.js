@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', scanPage);
 
 // Add this at the top of popup.js, after your existing event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Add the styles for the progress bar animation
+    // Add the styles for both progress bar and loading animations
     const style = document.createElement('style');
     style.textContent = `
         @keyframes progress {
@@ -17,6 +17,22 @@ document.addEventListener('DOMContentLoaded', () => {
             transform: rotate(-180deg);
             transform-origin: 50% 50%;
         }
+
+        .loading-maple {
+            width: 80px;
+            height: 80px;
+            background-image: url('media/maple.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 20px auto;
+            animation: spinY 2s infinite linear;
+        }
+
+        @keyframes spinY {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
     `;
     document.head.appendChild(style);
 });
@@ -25,7 +41,12 @@ const BACKEND_URL = 'http://localhost:5000/api/cart-data';
 
 function scanPage() {
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '<p class="text-center text-gray-500">Scanning...</p>';
+    resultsDiv.innerHTML = `
+        <div class="text-center">
+            <div class="loading-maple"></div>
+            <p class="text-gray-500 mt-4">Canifying your experience...</p>
+        </div>
+    `;
 
     console.log('Starting automatic scan...');
     
