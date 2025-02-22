@@ -128,3 +128,26 @@ button:hover.bg-red-500 {
 .bg-leaf-animation {
   animation: pulse-leaf 4s ease-in-out infinite;
 }
+
+/* Add these new styles */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.border-l-4 {
+  border-left-width: 4px;
+}
+
+/* Enhanced animations */
+@keyframes slide-in {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.product-item {
+  animation: slide-in 0.3s ease-out forwards;
+}

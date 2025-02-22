@@ -19,26 +19,26 @@
       </svg>
     </div>
 
-    <!-- Header -->
-    <div class="flex items-center space-x-2 mb-6 relative z-10">
-      <svg class="w-8 h-8 text-red-600 drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
+    <!-- Updated Header Section -->
+    <div class="flex items-center space-x-3 mb-8 relative z-10">
+      <svg class="w-10 h-10 text-red-600 drop-shadow-lg transform hover:rotate-12 transition-transform" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/>
       </svg>
-      <span class="font-bold text-2xl bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
-        Canify
-      </span>
+      <div>
+        <h1 class="font-bold text-3xl bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
+          Canify
+        </h1>
+        <p class="text-xs text-red-400 font-medium">Proudly Canadian</p>
+      </div>
     </div>
 
-    <!-- Content -->
-    <div class="text-center relative z-10">
-      <h1 class="text-2xl font-bold text-red-800 mb-4">
-        Analyzing Cart
-      </h1>
-
-      <!-- Results Area -->
-      <div class="mt-6 p-4 bg-white bg-opacity-90 rounded-lg shadow-lg">
-        <div id="results" class="text-left">
-          <p class="text-red-700 text-center">Scanning page...</p>
+    <!-- Updated Results Section -->
+    <div class="mt-6 p-4 bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl">
+      <div id="results">
+        <!-- Loading State -->
+        <div class="animate-pulse space-y-4">
+          <div class="h-4 bg-red-100 rounded w-3/4 mx-auto"></div>
+          <div class="h-12 bg-red-50 rounded-lg"></div>
         </div>
       </div>
     </div>

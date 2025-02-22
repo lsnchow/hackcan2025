@@ -84,27 +84,44 @@ function scanPage() {
                                     // Check if response matrix exists and has items
                                     if (!responseMatrix || responseMatrix.length === 0) {
                                         productListHtml = `
-                                            <div class="text-center py-6">
-                                                <p class="text-red-600 font-semibold">No products found in cart</p>
-                                                <p class="text-sm text-gray-500 mt-2">Try adding items to your cart first</p>
+                                            <div class="text-center py-8 space-y-4">
+                                                <div class="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
+                                                    <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                    </svg>
+                                                </div>
+                                                <h3 class="text-lg font-semibold text-red-800">Empty Cart Detected</h3>
+                                                <p class="text-sm text-red-400 max-w-xs mx-auto">
+                                                    We couldn't find any products in your shopping cart. Try adding items first.
+                                                </p>
                                             </div>
                                         `;
                                     } else {
                                         productListHtml = `
-                                            <div class="space-y-4">
+                                            <div class="grid gap-4">
                                                 ${responseMatrix.map((row, index) => `
-                                                    <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all duration-300">
-                                                        <div class="flex justify-between items-center">
-                                                            <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Item ${index + 1}</span>
-                                                            <span class="text-xs text-gray-400">In cart</span>
+                                                    <div class="group relative bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-red-500">
+                                                        <div class="flex justify-between items-start">
+                                                            <div class="pr-4">
+                                                                <span class="text-xs font-semibold text-red-600">#${index + 1}</span>
+                                                                <h3 class="text-base font-medium text-gray-800 mt-1">${row[0]}</h3>
+                                                                <div class="flex items-center mt-2 space-x-2">
+                                                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">80% Canadian</span>
+                                                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Certified</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
+                                                                <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                </svg>
+                                                            </div>
                                                         </div>
-                                                        <div class="flex mt-2">
-                                                            <div class="w-1/2 pr-2">
-                                                                <p class="text-gray-700 font-medium text-sm leading-snug">${row[0]}</p>
-                                                            </div>
-                                                            <div class="w-1/2 pl-2">
-                                                                <!-- Right side content can be added here -->
-                                                            </div>
+                                                        <div class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <button class="p-1 hover:bg-red-50 rounded-full text-gray-400 hover:text-red-600">
+                                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                                </svg>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 `).join('')}
