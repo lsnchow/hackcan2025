@@ -5,7 +5,7 @@ const BACKEND_URL = 'http://localhost:5000/api/cart-data';
 
 function scanPage() {
     const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = '<p class="text-center">Scanning...</p>';
+    resultsDiv.innerHTML = '<p class="text-center text-gray-500">Scanning...</p>';
 
     console.log('Starting automatic scan...');
     
@@ -45,7 +45,7 @@ function scanPage() {
                                 console.error('Runtime error:', chrome.runtime.lastError);
                                 resultsDiv.innerHTML = `
                                     <p class="text-red-500">Error: ${chrome.runtime.lastError.message}</p>
-                                    <p class="text-sm">Try refreshing the page</p>
+                                    <p class="text-sm text-gray-500">Try refreshing the page</p>
                                 `;
                                 return;
                             }
@@ -61,7 +61,6 @@ function scanPage() {
                             })
                             .then(async response => {
                                 console.log('Response status:', response.status);
-                                console.log('Response headers:', response.headers);
                                 if (!response.ok) {
                                     throw new Error(`HTTP error! status: ${response.status}`);
                                 }
@@ -74,18 +73,36 @@ function scanPage() {
 
                                 // Check if data is valid and contains 'status' field
                                 if (data && data.status === 'success') {
-                                    // Create an HTML string to display the product names
                                     const productNames = data.product_names;
-                                    let productListHtml = '<ul>';
+                                    
+                                    // Make the results div scrollable with a max-height
+                                    resultsDiv.style.height = '400px';
+                                    resultsDiv.style.maxHeight = '400px';
+                                    resultsDiv.className = 'overflow-y-auto p-4';
+                                    resultsDiv.style.backgroundColor = '#ff0000';
 
-                                    // Loop through the product names and create a list
+                                    let productListHtml = `
+                                        <div class="space-y-4">
+                                    `;
+
+                                    // Loop through the product names and create styled boxes
                                     productNames.forEach((product, index) => {
-                                        productListHtml += `<li>NUMBER ${index + 1}. ${product}</li>`;
+                                        productListHtml += `
+                                            <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all duration-300">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Item ${index + 1}</span>
+                                                    <span class="text-xs text-gray-400">In cart</span>
+                                                </div>
+                                                <p class="mt-2 text-gray-700 font-medium text-sm leading-snug">${product}</p>
+                                            </div>
+                                        `;
                                     });
 
-                                    productListHtml += '</ul>';
+                                    productListHtml += `
+                                        </div>
+                                    `;
 
-                                    // Update the resultsDiv with the product list
+                                    // Update the resultsDiv with the styled product list
                                     resultsDiv.innerHTML = productListHtml;
                                 } else {
                                     // Handle unexpected response structure or failure

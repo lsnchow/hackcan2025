@@ -3,16 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>Canify</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Your custom styles.css -->
   <link href="styles.css" rel="stylesheet">
 </head>
-<body>
-  <div class="w-[400px] h-[500px] bg-white p-4 overflow-hidden relative">
+<body class="bg-gray-100">
+
+  <!-- Main Popup Container -->
+  <div class="w-[400px] h-[500px] bg-white p-4 overflow-hidden relative rounded-lg shadow-lg">
     <!-- Header -->
     <div class="flex items-center space-x-2 mb-6">
       <svg class="w-6 h-6 text-red-500" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/>
       </svg>
-      <span class="font-medium text-xl bg-gradient">Canify</span>
+      <span class="font-medium text-xl text-gray-800">Canify</span>
     </div>
 
     <!-- Content -->
