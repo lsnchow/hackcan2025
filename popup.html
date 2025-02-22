@@ -8,28 +8,37 @@
   <!-- Your custom styles.css -->
   <link href="styles.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100">
+<body class="bg-red-500">
 
   <!-- Main Popup Container -->
-  <div class="w-[400px] h-[500px] bg-white p-4 overflow-hidden relative rounded-lg shadow-lg">
-    <!-- Header -->
-    <div class="flex items-center space-x-2 mb-6">
-      <svg class="w-6 h-6 text-red-500" viewBox="0 0 24 24" fill="currentColor">
+  <div class="w-[400px] h-[500px] bg-red-100 p-4 overflow-hidden relative">
+    <!-- Large background maple leaf -->
+    <div class="absolute inset-0 z-0 opacity-10 bg-leaf-animation">
+      <svg class="w-full h-full text-red-300" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/>
       </svg>
-      <span class="font-medium text-xl text-gray-800">Canify</span>
+    </div>
+
+    <!-- Header -->
+    <div class="flex items-center space-x-2 mb-6 relative z-10">
+      <svg class="w-8 h-8 text-red-600 drop-shadow-lg" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z"/>
+      </svg>
+      <span class="font-bold text-2xl bg-gradient-to-r from-red-600 to-red-400 bg-clip-text text-transparent">
+        Canify
+      </span>
     </div>
 
     <!-- Content -->
-    <div class="text-center">
-      <h1 class="text-2xl font-bold text-gray-800 mb-4">
+    <div class="text-center relative z-10">
+      <h1 class="text-2xl font-bold text-red-800 mb-4">
         Analyzing Cart
       </h1>
 
       <!-- Results Area -->
-      <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+      <div class="mt-6 p-4 bg-white bg-opacity-90 rounded-lg shadow-lg">
         <div id="results" class="text-left">
-          <p class="text-gray-500 text-center">Scanning page...</p>
+          <p class="text-red-700 text-center">Scanning page...</p>
         </div>
       </div>
     </div>
