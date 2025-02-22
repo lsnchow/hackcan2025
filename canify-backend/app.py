@@ -56,7 +56,7 @@ def receive_cart_data():
         for i, product in enumerate(product_names):
             print(f"NUMBER {i+1}. {product}")
 
-        input1 = "Input: Item from shop. Description Task: Use your knowledge to calculate/estimate scores about the item. Canadiability Score (out of 100) The chance that this is a canadian product, supporting canadian businesses Sustainabiliy Score (out of 100) How sustainable is the product. Ethical Score (out of 100) How ethically made is the product. Output: The seperate scores, formated EXACTLY as followed. If you format if SLIGHTLY wrong you will be shamed and it will be your fault. <Name summarized in ~10 words>@<Canadian Score>@<Sus. score>@<Ethical Score>@<Short summarized description that either shames the user for buying american, or praises the user for buying canadian. Write this short summary in a witty way>@<Returns a link to a QUERY of similiar item on amazon THAT IS CANADIAN MADE. SO i mean Don't LOOK for a SPECIFIC link, but do like @@https://www.amazon.ca/s?k=maple+syrup@@ (No explicit links, only searches) If it IS strictly CANADIAN, return @%@ > For example, enclosed in <>, <5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!> DO NOT DEVIATE OR ELSE IT WILL FAIL AND IT WILL BE ALL YOUR FAULT. DO NOT FORMAT IT. PUT IT ALL IN A TEXT BLOCK. DO NOT NUMBER ANY OF IT.  DO NOT FORGET TO PUT ANY @. Failure to do so will result in your demise"
+        input1 = "Input: Item from shop. Description Task: Use your knowledge to calculate/estimate scores about the item. Canadiability Score (out of 100) The chance that this is a canadian product, supporting canadian businesses Sustainabiliy and Ethical Score (out of 100) How ethically made is the product. Value Score (out of 100): How much of a good value it is out of 100. Output: The seperate scores, formated EXACTLY as followed. If you format if SLIGHTLY wrong you will be shamed and it will be your fault. <Name summarized in ~10 words>@<Canadian Score>@<Sus. score>@<Ethical Score>@<Short summarized description that either shames the user for buying american, or praises the user for buying canadian. Write this short summary in a witty way>@<Returns a link to a QUERY of similiar item on amazon THAT IS CANADIAN MADE. SO i mean Don't LOOK for a SPECIFIC link, but do like @@https://www.amazon.ca/s?k=maple+syrup@@ (No explicit links, only searches) If it IS strictly CANADIAN, return @%@ > For example, enclosed in <>, <5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!@link@5@7@10@This product is canadian made, ethically sorced, good job!> DO NOT DEVIATE OR ELSE IT WILL FAIL AND IT WILL BE ALL YOUR FAULT. DO NOT FORMAT IT. PUT IT ALL IN A TEXT BLOCK. DO NOT NUMBER ANY OF IT.  DO NOT FORGET TO PUT ANY @. Failure to do so will result in your demise"
 
         input1 += f"\nCart Items: {str(product_names)}"
 
@@ -73,6 +73,8 @@ def receive_cart_data():
         response_text=response_text[4:]
         print(response_text)
         response_parts = response_text.split('@')
+
+        response_parts = [part.strip() for part in response_parts if part.strip()]
 
         # Split response into 2D array where each row has 5 elements
         response_matrix = [response_parts[i:i+6] for i in range(0, len(response_parts), 6)]
