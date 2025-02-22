@@ -73,7 +73,7 @@ function scanPage() {
 
                                 if (data && data.status === 'success') {
                                     const productNames = data.product_names;
-
+                                    
                                     // Make the results div scrollable
                                     resultsDiv.style.height = '400px';
                                     resultsDiv.style.maxHeight = '400px';
@@ -132,3 +132,4 @@ function scanPage() {
         });
     });
 }
+
