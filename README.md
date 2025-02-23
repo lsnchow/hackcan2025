@@ -151,7 +151,5 @@ We welcome contributions! If you’d like to **enhance Canify**, feel free to:
 - Report **issues**.
 - Suggest **improvements**.
 
-Let's build a **stronger Canadian economy** together! 🇨🇦🔥
-
 ---
 
