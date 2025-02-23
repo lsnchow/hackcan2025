@@ -36,6 +36,8 @@ Users **earn NEAR coins** based on the **Canadian content** of their purchases. 
 
 ---
 
+![shade-architecture](media/shade-architecture)
+
 ## 🔒 NEAR Shade Agents Integration
 To enhance **security and efficiency**, Canify integrates with **NEAR Protocol** and **Shade Agents**. Here’s how:
 
@@ -134,8 +136,22 @@ Our implementation of the **Google Toolkit**, specifically the **Gemini API** an
 
 ---
 
+## 🔑 Setting Up Gemini API Key
+To enable the **Gemini API** for product assessments, define your **API key** in `app.py`. Open `app.py` and add your Gemini API key as follows:
+```python
+API_KEY = "your-gemini-api-key-here"
+```
+Replace `"your-gemini-api-key-here"` with your actual **Gemini API key** to enable API calls.
+
+---
+
 ## 🤝 Contributing
 We welcome contributions! If you’d like to **enhance Canify**, feel free to:
 - Submit **pull requests**.
 - Report **issues**.
 - Suggest **improvements**.
+
+Let's build a **stronger Canadian economy** together! 🇨🇦🔥
+
+---
+
