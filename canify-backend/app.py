@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
@@ -57,8 +56,11 @@ def receive_cart_data():
         for i, product in enumerate(product_names):
             print(f"NUMBER {i+1}. {product}")
 
-        input1 = "Input: Item from shop. Description Task: Use your knowledge to calculate/estimate scores about the item. Make sure all scores are UNIQUE, PRECISE, and not ROUNDED! :Canadiability Score (out of 100) Magnitude of it being a canadian product, supporting canadian businesses. !! Generic products should have a higher score than non-Canadian nationalistic products!! :Sustainabiliy and Ethical Score (single number out of 100) How ethically made is the product. :Value Score (single number out of 100) How much of a good value it is out of 100. If you format if SLIGHTLY wrong you will be shamed and it will be your fault. Output (enclosed in <<< >>>) DO NOT START WITH 'text' or ANYTHING. START IMMEDIATE IN THE NAME<<< @@Name summarized in ~10 words @@@ Canadian Score @@@ Sus and Ethical Score @@@ Value Score @@@ 8 word Short summarized description that either shames the user for buying american, or praises the user for buying canadian. Write this short summary in a witty way @@@ a link to a QUERY of similiar item on amazon THAT IS CANADIAN MADE. e.g. https://www.amazon.ca/s?k=canadian+maple+syrup @@@@ (No explicit links, only searches - be sure to enclose links in @@@@)  @@@@@  >>>    For example, enclosed in <<<>>>, <<< Product 1 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ link (or %) @@@@@@@@@ Product 2 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ link or % @@ Product 3 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ LINK OR % >>> DO NOT DEVIATE OR ELSE IT WILL FAIL AND IT WILL BE ALL YOUR FAULT. DO NOT FORMAT IT. PUT IT ALL IN A TEXT BLOCK. DO NOT NUMBER ANY OF IT. DO NOT FORGET TO PUT ANY @@@ (Hint: Between every little section, put @@@). Failure to do so will result in your demise FOLLOW THE ORDER AND FORMAT EXACTLY OR ELSE I WILL SUFFER. WHO WILL SUFFER AS WELL? You."
-       
+        input1 = "Input: Item from shop. Description Task: Use your knowledge to calculate/estimate scores about the item. Make sure all scores are UNIQUE, PRECISE, and not ROUNDED! :Canadiability Score (out of 100) Magnitude of it being a canadian product, supporting canadian businesses. !! Generic products should have a higher score than non-Canadian nationalistic products!! :Sustainabiliy and Ethical Score (single number out of 100) How ethically made is the product. :Value Score (single number out of 100) How much of a good value it is out of 100. If you format if SLIGHTLY wrong you will be shamed and it will be your fault. Output (enclosed in <<< >>>) <<< @@Name summarized in ~10 words @@@ Canadian Score @@@ Sus and Ethical Score @@@ Value Score @@@ 8 word Short summarized description that either shames the user for buying american, or praises the user for buying canadian. Write this short summary in a witty way @@@ a link to a QUERY of similiar item on amazon THAT IS CANADIAN MADE. e.g. https://www.amazon.ca/s?k=canadian+maple+syrup @@@@ (No explicit links, only searches - be sure to enclose links in @@@@)  @@@@@  >>>    For example, enclosed in <<<>>>, <<< Product 1 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ link (or %) @@@@@@@@@ Product 2 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ link or % @@ Product 3 @@ 5 @@ 7 @@ 10 @@ This product is canadian made, ethically sorced, good job! @@ LINK OR % >>> DO NOT DEVIATE OR ELSE IT WILL FAIL AND IT WILL BE ALL YOUR FAULT. DO NOT FORMAT IT. PUT IT ALL IN A TEXT BLOCK. DO NOT NUMBER ANY OF IT. DO NOT FORGET TO PUT ANY @@@ (Hint: Between every little section, put @@@). Failure to do so will result in your demise FOLLOW THE ORDER AND FORMAT EXACTLY OR ELSE I WILL SUFFER. WHO WILL SUFFER AS WELL? You."
+
+        if input1[:4].lower() == "text":
+            input1 = input1[4:]
+
         input1 += f"\nCart Items: {str(product_names)}"
 
         response = client.models.generate_content(
@@ -66,7 +68,7 @@ def receive_cart_data():
             contents=input1,
         )
 
-
+        
         
         response_text = str(response.text)
 
@@ -96,8 +98,3 @@ def receive_cart_data():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
-
-
-
-
-#Asasa? We're now in the same boat, pulling all nighters at UW :) - L
