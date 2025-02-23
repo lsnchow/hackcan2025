@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         .loading-maple {
-            width: 80px;
-            height: 80px;
+            width: 200px;
+            height: 200px;
             background-image: url('media/maple.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            margin: 20px auto;
+            margin: 40px auto;
             animation: spinY 2s infinite linear;
         }
 
@@ -57,9 +57,9 @@ const BACKEND_URL = 'http://localhost:5000/api/cart-data';
 function scanPage() {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
-        <div class="text-center">
+        <div class="text-center bg-white p-8 rounded-3xl shadow-md">
             <div class="loading-maple"></div>
-            <p class="text-gray-500 mt-4">Canifying your experience...</p>
+            <p class="text-gray-500 mt-6 text-lg">Canifying your experience...</p>
         </div>
     `;
 
@@ -155,7 +155,7 @@ function scanPage() {
                                         productListHtml = `
                                             <div class="space-y-4">
                                                 ${responseMatrix.map((row, index) => `
-                                                    <div class="group relative bg-white p-4 rounded-xl shadow-sm hover:shadow-md smooth-transition flex flex-col h-72">
+                                                    <div class="group relative bg-white p-4 rounded-2xl shadow-sm hover:shadow-md smooth-transition flex flex-col h-72">
                                                         <!-- Top Section -->
                                                         <div class="flex items-start justify-between mb-4">
                                                             <div class="pr-4 flex-1">
