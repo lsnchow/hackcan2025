@@ -36,7 +36,7 @@ Users **earn NEAR coins** based on the **Canadian content** of their purchases. 
 
 ---
 
-![shade-architecture](media/shade-architecture)
+![shade-architecture](media/shade-architecture.png)
 
 ## 🔒 NEAR Shade Agents Integration
 To enhance **security and efficiency**, Canify integrates with **NEAR Protocol** and **Shade Agents**. Here’s how:
