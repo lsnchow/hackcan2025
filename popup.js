@@ -152,38 +152,53 @@ function scanPage() {
                                             </div>
                                         `;
                                     } else {
-                                        productListHtml = responseMatrix.map((row, index) => `
-                                            <div class="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-md p-4 hover:shadow-lg transition-all duration-300 mb-4">
-                                                <div class="flex items-center justify-between">
-                                                    <div class="w-1/2">
-                                                        <span class="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Item ${index + 1}</span>
-                                                        <p class="text-gray-700 font-medium text-sm leading-snug mt-2">${row[0]}</p>
-                                                    </div>
-                                                    <div class="relative w-20 h-20">
-                                                        <svg class="w-full h-full" viewBox="0 0 36 36">
-                                                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="3"/>
-                                                            <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="${normalizeValue((Number(row[1])), Number(row[2]), Number(row[3]))}, 100" class="animate-progress"/>
-                                                        </svg>
-                                                        <div class="absolute inset-0 flex items-center justify-center">
-                                                            <span class="text-lg font-semibold text-gray-700">${normalizeValue((Number(row[1])), Number(row[2]), Number(row[3]))}%</span>
+                                        productListHtml = `
+                                            <div class="space-y-4">
+                                                ${responseMatrix.map((row, index) => `
+                                                    <div class="group relative bg-white p-4 rounded-xl shadow-sm hover:shadow-md smooth-transition flex flex-col h-72">
+                                                        <!-- Top Section -->
+                                                        <div class="flex items-start justify-between mb-4">
+                                                            <div class="pr-4 flex-1">
+                                                                <span class="text-xs font-medium text-gray-400">Item ${index + 1}</span>
+                                                                <h3 class="text-base font-semibold text-gray-800 mt-1">${row[0]}</h3>
+                                                            </div>
+                                                            <div class="w-20 h-20 ml-4 relative">
+                                                                <svg class="w-full h-full" viewBox="0 0 36 36">
+                                                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" 
+                                                                          fill="none" 
+                                                                          stroke="#eee" 
+                                                                          stroke-width="3"/>
+                                                                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                                                          fill="none" 
+                                                                          stroke="#dc2626" 
+                                                                          stroke-width="3" 
+                                                                          stroke-dasharray="${normalizeValue(row[1], row[2], row[3])}, 100"
+                                                                          class="animate-progress"/>
+                                                                </svg>
+                                                                <div class="absolute inset-0 flex items-center justify-center">
+                                                                    <span class="text-sm font-semibold text-gray-700">
+                                                                        ${normalizeValue(row[1], row[2], row[3])}%
+                                                                    </span>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        
-                                                        <!-- Updated quote section -->
-                                                        <div class="mt-4 pt-3 border-t border-gray-100">
-                                                            <p class="text-sm text-gray-500 italic">
+
+                                                        <!-- Bottom Section -->
+                                                        <div class="mt-auto pt-4 border-t border-gray-100">
+                                                            <div class="text-sm text-gray-500 italic">
                                                                 "${row[4]}"
-                                                            </p>
+                                                            </div>
                                                             <div class="text-xs text-gray-400 mt-2 flex items-center">
                                                                 <svg class="w-3 h-3 mr-1 text-red-400" fill="currentColor" viewBox="0 0 20 20">
                                                                     <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                                                 </svg>
-                                                                Verified by Canify
+                                                                Canadian Content Score
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                `).join('')}
                                             </div>
-                                        `).join('');
+                                        `;
                                     }
 
                                     resultsDiv.innerHTML = productListHtml;
