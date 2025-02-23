@@ -8,19 +8,26 @@
   <!-- Your custom styles.css -->
   <link href="styles.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body class="bg-red-400" style="background-color: rgb(248, 113, 113) !important;">
 
   <!-- Main Popup Container -->
   <div class="w-[400px] h-[500px] bg-red-950 p-4 overflow-hidden relative">
+    <!-- Background Maple Leaf -->
+    <div class="absolute inset-0 opacity-10">
+      <img src="media/white-leaf.png" alt="" class="w-[7000px]"
+           style="position: absolute; top: 15%; left: 50%; transform: translate(-50%, -50%);">
+    </div>
 
     <!-- Updated Header Section - Centered Text -->
     <div class="flex justify-center items-center h-16 mb-2 relative z-10 mt-2">
-      <h1 class="text-6xl font-extrabold text-white tracking-wider" style="font-family: 'Inter', sans-serif;">CANIFY</h1>
+      <h1 class="text-6xl font-extrabold text-white tracking-wider" style="font-family: 'Plus Jakarta Sans', sans-serif;">CANIFY</h1>
     </div>
 
     <!-- Updated Results Section -->
-    <div class="mt-2 p-4 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl">
+    <div class="mt-0 p-4 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl">
       <div id="results">
         <!-- Loading State -->
         <div class="animate-pulse space-y-4">
