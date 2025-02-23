@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', scanPage);
 function normalizeValue(v1, v2, v3) {
     const answer = Math.round((1.2*(Number(v1))+Number(v2)+Number(v3))/3);
 
-    const vector_embeddig = [92, 93, 94, 95, 96, 97, 98, 99, 100];
+    const vector_embeddig = [92, 93, 94, 95, 96, 97, 98];
 
     if (answer > 100) {
         const scaledIndex = Math.floor(Math.random() * vector_embeddig.length);
@@ -53,8 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
             from { opacity: 0; transform: translate(-50%, -40%); }
             to { opacity: 1; transform: translate(-50%, -50%); }
         }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translate(-50%, -50%); }
+            to { opacity: 0; transform: translate(-50%, -60%); }
+        }
         .animate-fadeIn {
             animation: fadeIn 0.3s ease-out forwards;
+        }
+        .animate-fadeOut {
+            animation: fadeOut 0.3s ease-out forwards;
         }
     `;
     document.head.appendChild(style);
@@ -216,7 +223,7 @@ function scanPage() {
                                                             <!-- Low score version (<53%) -->
                                                             <div class="flex flex-col items-end mb-3">
                                                                 <button class="meme-coin-btn bg-yellow-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-md hover:bg-yellow-400 transition-colors cursor-pointer">
-                                                                    Uh, Oh!
+                                                                    <a href="${row[5]}" class="underline hover:text-gray-100" target="_blank">Canadian Alternatives</a>
                                                                 </button>
                                                             </div>
                                                         `}
@@ -256,23 +263,10 @@ function scanPage() {
     });
 }
 
-// At the top of popup.js
-function createConfetti() {
-    confetti({
-        particleCount: 150,
-        spread: 60,
-        origin: { y: 0.5, x: 0.5 },
-        colors: ['#FFD700', '#FDB931', '#FFDF00', '#F4C430'],
-        startVelocity: 30,
-        gravity: 0.5,
-        shapes: ['circle', 'square'],
-        scalar: 0.7
-    });
-}
-
+// Keep just the success popup function
 function createSuccessPopup(nearValue) {
     const popup = document.createElement('div');
-    popup.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-xl p-6 z-50 animate-fadeIn transition-opacity duration-500';
+    popup.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-xl p-6 z-50 animate-fadeIn transition-opacity duration-500 opacity-100';
     popup.innerHTML = `
         <div class="text-center">
             <div class="text-green-500 font-bold text-lg mb-2">Congrats!</div>
@@ -281,25 +275,13 @@ function createSuccessPopup(nearValue) {
     `;
     document.body.appendChild(popup);
 
-    // Trigger confetti
-    confetti({
-        particleCount: 150,
-        spread: 60,
-        origin: { y: 0.5, x: 0.5 },
-        colors: ['#FFD700', '#FDB931', '#FFDF00', '#F4C430'],
-        startVelocity: 30,
-        gravity: 0.5,
-        shapes: ['circle', 'square'],
-        scalar: 0.7
-    });
-
     // Fade out and remove popup after 1 second
     setTimeout(() => {
-        popup.style.opacity = '0';
+        popup.classList.add('animate-fadeOut');
         setTimeout(() => {
             if (popup && popup.parentNode) {
                 popup.parentNode.removeChild(popup);
             }
-        }, 500); // Wait for fade-out effect to complete before removing
+        }, 300); // Match the animation duration
     }, 1000);
 }
