@@ -48,6 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
             from { transform: rotateY(0deg); }
             to { transform: rotateY(360deg); }
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
     `;
     document.head.appendChild(style);
 });
@@ -188,20 +196,30 @@ function scanPage() {
                                                             "${row[4]}"
                                                         </div>
 
-                                                        <!-- Coin Counter with price info -->
-                                                        <div class="flex flex-col items-end mb-3">
-                                                            <button class="meme-coin-btn bg-yellow-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-md hover:bg-yellow-400 transition-colors cursor-pointer">
-                                                                ${(normalizeValue(row[1], row[2], row[3]) / 1064.38).toFixed(3)} NEAR COINS
-                                                            </button>
-                                                        </div>
-
-                                                        <!-- Bottom Border -->
-                                                        <div class="border-t border-gray-100 pt-4">
-                                                            <div class="text-[8px] text-gray-900 italic mt-0.5 text-xs text-gray-400 mt-2 flex items-center">
-                                                                <img src="media/near.png" alt="NEAR" class="w-3 h-3 mr-1"/>
-                                                                ${(normalizeValue(row[1], row[2], row[3]) / 1064.38).toFixed(3)} NEAR COIN = CA$${(4.72*(normalizeValue(row[1], row[2], row[3]) / 1064.38)).toFixed(3)}
+                                                        <!-- Conditional rendering based on score -->
+                                                        ${normalizeValue(row[1], row[2], row[3]) >= 53 ? `
+                                                            <!-- High score version (≥53%) -->
+                                                            <div class="flex flex-col items-end mb-3">
+                                                                <button class="meme-coin-btn bg-green-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-md hover:bg-green-400 transition-colors cursor-pointer">
+                                                                    ${(normalizeValue(row[1], row[2], row[3]) / 1064.38).toFixed(3)} NEAR COINS
+                                                                </button>
                                                             </div>
-                                                        </div>
+
+                                                            <!-- Bottom Border with conversion info -->
+                                                            <div class="border-t border-gray-100 pt-4">
+                                                                <div class="text-[8px] text-gray-900 italic mt-0.5 flex items-center">
+                                                                    <img src="media/near.png" alt="NEAR" class="w-3 h-3 mr-1"/>
+                                                                    ${(normalizeValue(row[1], row[2], row[3]) / 1064.38).toFixed(3)} NEAR COIN = CA$${(4.72*(normalizeValue(row[1], row[2], row[3]) / 1064.38)).toFixed(3)}
+                                                                </div>
+                                                            </div>
+                                                        ` : `
+                                                            <!-- Low score version (<53%) -->
+                                                            <div class="flex flex-col items-end mb-3">
+                                                                <button class="meme-coin-btn bg-yellow-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-md hover:bg-yellow-400 transition-colors cursor-pointer">
+                                                                    Uh, Oh!
+                                                                </button>
+                                                            </div>
+                                                        `}
                                                     </div>
                                                 `).join('')}
                                             </div>
@@ -211,7 +229,12 @@ function scanPage() {
                                     resultsDiv.innerHTML = productListHtml;
                                     const buttons = document.querySelectorAll('.meme-coin-btn');
                                     buttons.forEach(button => {
-                                        button.addEventListener('click', createConfetti);
+                                        button.addEventListener('click', (e) => {
+                                            if (button.classList.contains('bg-green-500')) {
+                                                const nearValue = button.textContent.split(' ')[0];
+                                                createSuccessPopup(nearValue);
+                                            }
+                                        });
                                     });
                                 } else {
                                     // Handle unexpected response structure or failure
@@ -245,4 +268,38 @@ function createConfetti() {
         shapes: ['circle', 'square'],
         scalar: 0.7
     });
+}
+
+function createSuccessPopup(nearValue) {
+    const popup = document.createElement('div');
+    popup.className = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-xl p-6 z-50 animate-fadeIn transition-opacity duration-500';
+    popup.innerHTML = `
+        <div class="text-center">
+            <div class="text-green-500 font-bold text-lg mb-2">Congrats!</div>
+            <div class="text-gray-700">Your Wallet has been credited!</div>
+        </div>
+    `;
+    document.body.appendChild(popup);
+
+    // Trigger confetti
+    confetti({
+        particleCount: 150,
+        spread: 60,
+        origin: { y: 0.5, x: 0.5 },
+        colors: ['#FFD700', '#FDB931', '#FFDF00', '#F4C430'],
+        startVelocity: 30,
+        gravity: 0.5,
+        shapes: ['circle', 'square'],
+        scalar: 0.7
+    });
+
+    // Fade out and remove popup after 1 second
+    setTimeout(() => {
+        popup.style.opacity = '0';
+        setTimeout(() => {
+            if (popup && popup.parentNode) {
+                popup.parentNode.removeChild(popup);
+            }
+        }, 500); // Wait for fade-out effect to complete before removing
+    }, 1000);
 }
