@@ -1,44 +1,141 @@
-Description
+# Canify: Rewarding the "Made in Canada" Movement 🇨🇦
 
-Canify boosts the Canadian economy by rewarding consumers who support the “Made in Canada” movement 🇨🇦. This is particularly important when international trade policies pose challenges to our economic growth (ahem, USA). Users who back Canadian businesses receive cryptocurrency rewards and government incentives 💰. Using blockchain technology, Canify provides a transparent and secure way for consumers to be recognized for their commitment to supporting local products.
+Canify boosts the Canadian economy by rewarding consumers who support the **“Made in Canada”** movement. This is particularly important when international trade policies pose challenges to our economic growth (*ahem*, USA). Users who back Canadian businesses receive **cryptocurrency rewards** and government incentives 💰.
 
-We developed a Google Chrome extension that analyzes the items in your Amazon cart, assessing them based on whether they are Canadian-made, ethically sourced, and provide good value for money. 🛍️.
+Using **blockchain technology**, Canify provides a transparent and secure way for consumers to be recognized for their commitment to supporting local products.
 
-For the reward system, users earn NEAR coins based on the Canadian content of their purchases. The coin transactions are funded through affiliate earnings generated from Amazon, creating a sustainable ecosystem that benefits both consumers and the Canadian economy 🌱.
+---
 
-Tools and Technologies:
-Frontend Development: JavaScript Tailwind CSS Gemini API
+## 🔥 What is Canify?
+We developed a **Google Chrome extension** that analyzes the items in your **Amazon cart**, assessing them based on:
+- ✅ Whether they are **Canadian-made**
+- ✅ Whether they are **ethically sourced**
+- ✅ Whether they provide **good value for money** 🛍️
 
-Backend Development: Flask (Python) Rust & Cargo Shade Agents NEAR Protocol
+### 🎯 How Rewards Work
+Users **earn NEAR coins** based on the **Canadian content** of their purchases. These coin transactions are funded through **affiliate earnings generated from Amazon**, creating a **sustainable ecosystem** that benefits both consumers and the Canadian economy 🌱.
 
-Infrastructure: Phala Network Docker
+---
 
-NEAR Shade Agents 🔒:
-To enhance security and efficiency, Canify integrates with NEAR Protocol and Shade Agents. Here's how:
+## 🛠 Tools and Technologies
 
-Smart Contract Deployment: We developed smart contracts using Rust & Cargo, which define the rules for minting and distributing Canify Coins. These contracts ensure that rewards are allocated based on user purchases and Canadian content.
-Trusted Execution Environments (TEEs): Shade Agents host these smart contracts, providing a secure environment for executing sensitive operations and safeguarding user data. This guarantees that all transactions and rewards are handled transparently and securely.
-Token Management: When users earn NEAR Coins, Shade Agents manage the token distribution, ensuring that transactions are processed efficiently and accurately.
-Google Toolkit 🛠️:
-Our implementation of the Google Toolkit, specifically the Gemini API and the Chrome extension, plays a vital role in the user experience:
+### **Frontend Development**
+- JavaScript
+- Tailwind CSS
+- Gemini API
 
-Chrome Extension Development: Using JavaScript and Tailwind CSS, we created a user-friendly Chrome extension that interacts seamlessly with Amazon’s interface. The extension provides real-time feedback to users about their cart items, enhancing their shopping experience.
-Gemini API Integration: This API facilitates communication between the frontend and backend. By leveraging Gemini, we provide users with immediate results and scores for their selected products.
-User Engagement: The Google Toolkit enhances user engagement by allowing them to easily track their rewards and see how their purchases contribute to the Canadian economy.
-Pipeline Process:
-Cart Scanning 🛒:
+### **Backend Development**
+- Flask (Python)
+- Rust & Cargo
+- Shade Agents
+- NEAR Protocol
 
-The extension scans the user’s Amazon cart in real-time, retrieving product details such as name, category, and origin.
-It collects data on each item to prepare for the assessment process.
-Assessment Algorithm ⚙️:
+### **Infrastructure**
+- Phala Network
+- Docker
 
-The backend algorithm evaluates each item based on three key criteria: Canadian Origin, Ethical Sourcing, and Value for Money
-Each item receives a score reflecting its alignment with these criteria.
-Scoring and Rewards Calculation 📊:
+---
 
-The algorithm calculates the total Canadian content percentage of the cart based on individual item scores.
-Users are rewarded with NEAR Coins, which are awarded in proportion to the Canadian content of their purchases.
-Transaction Management 🔗:
+## 🔒 NEAR Shade Agents Integration
+To enhance **security and efficiency**, Canify integrates with **NEAR Protocol** and **Shade Agents**. Here’s how:
 
-Shade Agents interact with the backend to manage the secure awarding of tokens.
-NEAR Coins are minted and transferred to users’ wallets based on their purchases.
+### **Smart Contract Deployment**
+- Developed **smart contracts** using **Rust & Cargo**, defining rules for minting and distributing **Canify Coins**.
+- Ensures rewards are allocated based on **user purchases** and **Canadian content**.
+
+### **Trusted Execution Environments (TEEs)**
+- Shade Agents **host smart contracts** in a **secure environment**.
+- Protects **sensitive operations** and **safeguards user data**.
+- Ensures **transactions and rewards** are **transparent and secure**.
+
+### **Token Management**
+- Shade Agents **manage NEAR Coin distribution**.
+- Ensures transactions are **processed efficiently** and **accurately**.
+
+---
+
+## 🛠 Google Toolkit Integration
+Our implementation of the **Google Toolkit**, specifically the **Gemini API** and **Chrome extension**, plays a vital role in **user experience**:
+
+### **Chrome Extension Development**
+- Built using **JavaScript & Tailwind CSS**.
+- Seamlessly interacts with **Amazon’s interface**.
+- Provides **real-time feedback** on **cart items**.
+
+### **Gemini API Integration**
+- Facilitates **communication** between the frontend and backend.
+- Enables **instant product assessments**.
+
+### **User Engagement**
+- Enhances user interaction.
+- Allows users to **track rewards** and see their **economic impact**.
+
+---
+
+## 🔄 Pipeline Process
+
+### **🛒 Cart Scanning**
+- The extension scans the user’s **Amazon cart in real-time**.
+- Retrieves **product details** such as **name, category, and origin**.
+- Prepares data for the **assessment process**.
+
+### **⚙️ Assessment Algorithm**
+- Evaluates each item based on:
+  - **Canadian Origin** 🇨🇦
+  - **Ethical Sourcing** ✅
+  - **Value for Money** 💰
+- Assigns a **score** reflecting its alignment with these criteria.
+
+### **📊 Scoring and Rewards Calculation**
+- Calculates the **total Canadian content percentage** of the cart.
+- Users **earn NEAR Coins** based on **Canadian content**.
+
+### **🔗 Transaction Management**
+- **Shade Agents** securely handle token transactions.
+- **NEAR Coins** are **minted and transferred** to users’ wallets.
+
+---
+
+## 🚀 Installation Guide
+
+### **Mac/Linux Users** 🐧🍏
+1. Open your terminal and navigate to the project directory.
+2. Run the following command:
+   ```sh
+   ./s.sh
+   ```
+3. This script will:
+   - Create a **virtual environment**.
+   - Install **dependencies**.
+   - Start the **Flask backend server**.
+4. Open **Google Chrome** and go to:
+   ```
+   chrome://extensions
+   ```
+5. Click **"Load unpacked"** and select **this repository's folder**.
+6. Turn on the extension and start using Canify! 🎉
+
+### **Windows Users** 🖥️
+1. Open **Command Prompt (cmd)** and navigate to the project directory.
+2. Run the following command:
+   ```sh
+   ./s.bat
+   ```
+3. This script will:
+   - Create a **virtual environment**.
+   - Install **dependencies**.
+   - Start the **Flask backend server**.
+4. Open **Google Chrome** and go to:
+   ```
+   chrome://extensions
+   ```
+5. Click **"Load unpacked"** and select **this repository's folder**.
+6. Turn on the extension and start using Canify! 🚀
+
+---
+
+## 🤝 Contributing
+We welcome contributions! If you’d like to **enhance Canify**, feel free to:
+- Submit **pull requests**.
+- Report **issues**.
+- Suggest **improvements**.
